@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Field Notes — a constellation of ideas</title>
+<title>Syzygia</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -51,9 +51,9 @@
   }
 
   #brand{
-    position:fixed; top:34px; left:38px; z-index:5;
+    position:fixed; top:38px; left:50px; z-index:5;
     font-family:'IBM Plex Mono', monospace;
-    font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+    font-size:24px; letter-spacing:0.55em; text-transform:lowercase;
     color:var(--ink-dim);
     pointer-events:none;
   }
@@ -62,7 +62,7 @@
   #hint{
     position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
     z-index:5; font-family:'IBM Plex Mono', monospace;
-    font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase;
+    font-size:12px; letter-spacing:0.15em; text-transform:uppercase;
     color:var(--ink-faint);
     pointer-events:none;
     transition:opacity 0.6s ease;
@@ -171,8 +171,8 @@
 <div id="vignette"></div>
 <div id="grain"></div>
 
-<div id="brand">field notes <span>/ a constellation</span></div>
-<div id="hint">drag to look around · scroll to move closer · click a star to read</div>
+<div id="brand">syzygia</div>
+<div id="hint">drag to look around · click a star to read</div>
 
 <div id="panel">
   <div class="cat" id="panel-cat"></div>
@@ -187,7 +187,7 @@
 <div id="article-view">
   <button class="back-btn" id="back-btn">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
-    constellation
+    syzygia
   </button>
   <div class="article-column" id="article-column"></div>
 </div>
@@ -208,25 +208,26 @@ var CONFIG = {
      Add a category here, then use its key as `cat` on an article below. */
   categories: {
     physics:  { label:'Physics & Cosmos',        color:'#9bd4c9' },
-    math:     { label:'Mathematics',              color:'#b0ace3' },
-    ir:       { label:'International Relations',  color:'#e0aec0' },
-    web:      { label:'Web & Systems',             color:'#acd89a' },
-    robotics: { label:'Robotics & Hardware',       color:'#f3bd82' },
-    essays: { label:'Essays',                       color:'#eb9850' }
+    robotics:     { label:'Robotics',              color:'#b0ace3' },
+    mun:       { label:'Model United Nations ',  color:'#x  ff6966' },
+    tech:      { label:'Technology',             color:'#acd89a' },
+    comp: { label:'Competitions',       color:'#00a2e8' },
+    essays: { label:'Essays',                       color:'#eb9850' },
+    misc: { label:'Miscellaneous',                 color:'#79ba00' }
   },
 
   /* Camera + orbit controls */
   scene: {
     fov: 46,
     homeTheta: 0.35,          // starting horizontal angle (radians)
-    homePhi: 1.25,            // starting vertical angle (radians)
+    homePhi: 2.25,            // starting vertical angle (radians)
     homeRadius: 20,           // starting distance from center — bigger = more zoomed out
     zoomMin: 6,
     zoomMax: 30,
     dragRotateSpeed: 0.0045,
     dragTiltSpeed: 0.0035,
     wheelZoomSpeed: 0.012,
-    idleRotateSpeed: 0.022,   // how fast the constellation slowly turns on its own
+    idleRotateSpeed: 0.052,   // how fast the constellation slowly turns on its own
     idleResumeDelay: 2600,    // ms of no interaction before auto-rotate resumes
     followEase: 0.08          // how quickly the camera eases toward target each frame (0-1)
   },
@@ -305,22 +306,22 @@ var CONFIG = {
      date       display string
      readTime   minutes, shown in panel + article header
      body       array of paragraphs (plain strings)
+
+     
+    physics:  { label:'Physics & Cosmos',        color:'#9bd4c9' },
+    robotics:     { label:'Robotics',              color:'#b0ace3' },
+    mun:       { label:'Model United Nations ',  color:'#x  ff6966' },
+    tech:      { label:'Technology',             color:'#acd89a' },
+    comp: { label:'Competitions',       color:'#00a2e8' },
+    essays: { label:'Essays',                       color:'#eb9850' },
+    misc: { label:'Miscellaneous',                 color:'#79ba00' }
 =========================================================================== */
 var ARTICLES = [
-  { id:'wavefunctions', cat:'physics', importance:0.95,
-    title:'From Wavefunctions to Fireballs',
-    desc:'How the calm mathematics of Schrödinger\'s equation ends, several layers down, in a plasma hot enough to melt protons.',
-    date:'11 Feb 2026', readTime:9,
-    body:[
-      'There is a strange comfort in the Schrödinger equation. It is linear, it is deterministic, and for a first year it behaves. You solve the infinite square well, you solve the harmonic oscillator, and the universe feels briefly tidy — a wavefunction evolving smoothly through Hilbert space, probabilities conserved, nothing lost.',
-      'Then you meet the Heisenberg Uncertainty Principle properly, not as a slogan about not knowing things, but as a statement about which pairs of questions a physical system is even allowed to answer at once. Position and momentum are not secrets the electron is keeping from you. They are quantities that cannot simultaneously have sharp values, full stop. That reframing — from ignorance to incompatibility — is the hinge the rest of the piece turns on.',
-      'From there the essay follows a single thread down through the Standard Model, through colour charge and the strange non-abelian bookkeeping of the strong force, and finally into the quark-gluon plasma: a state of matter recreated for microseconds at RHIC and in ALICE at CERN, where confinement itself briefly fails and quarks stop pretending to live inside protons. The wavefunction you started with is still in there somewhere. It is just very, very busy.'
-    ]},
-
-  { id:'commonwealth', cat:'essays', importance:1.55,
+  
+  { id:'commonwealth', cat:'essays', importance:1.65,
     title:'Perfectly Imperfect Humans',
-    desc:'An essay on how humanity is still the driving force behind the world, stressing on how our flaws can never be replaced',
-    date:'~ Krishav Agarwal  ·  30 Apr 2026', readTime:10,
+    desc:'An essay on how humanity still exists due to our flaws. However perfect we make robots, our flaws can never be replaced',
+    date:'30 Apr 2026', readTime:10,
     body:[
     `“Perfectly Imperfect Humans and Imperfectly Perfect Robots.” ~ Duncan Mclauchlan (Mclauchlan)`,
     `I believe that what people contribute to the Commonwealth that technology can never replace is not our cleverness, but our humanity. Not our data, but our glitches that make us real. By examining the unique value of human imperfection and the necessity of emotional irrationality, we find that human connection is not vital despite our flaws, but precisely because of them. To remain uniquely human in a digital age, we must stop trying to be better computers and instead reclaim our right to be beautifully, defiantly broken: perfectly imperfect; not just as individuals, but as communities across the Commonwealth bound by shared histories and experiences.`,
@@ -336,162 +337,77 @@ var ARTICLES = [
     `This essay was submitted to the 2026 Commonwealth Essay Competition. Results are not yet announced.`
   ]},
 
-  { id:'cambridge', cat:'essays', importance:1.7,
+  { id:'cambridge', cat:'essays', importance:1.4,
     title:'From Zero to One',
     desc:'Why governments must fund moonshot science, and why incrementalism is a moral abdication of the future.',
     date:'22 May 2026', readTime:12,
-    body:[
-`In 1962, standing before a crowd at Rice University, President John F. Kennedy declared that the United States would go to the Moon not because it was easy, but precisely because it was hard. Many dismissed the statement as political theatre. It was, in fact, something more precise: an institutional commitment to the idea that civilisational ambition is itself a policy instrument. Kennedy was not announcing a programme with a calculated return on investment. He was placing a civilisational bet, and in doing so, changing what the future was allowed to contain. Today, as governments wrestle with finite budgets and infinite demands, a familiar logic re-emerges: fund what works, what is proven, what delivers measurable benefit within an election cycle. This essay argues that this logic, however prudent it sounds, is historically illiterate and strategically self-defeating. The thesis is this: governments are the only institutions structurally capable of funding science at the scale and patience that civilisation-altering problems require, and to retreat to pure incrementalism is not caution. It is the slow, deniable abdication of the future.`,
-
-`The case for moonshot public funding begins not with ideology but with structure. Private capital, even at its most ambitious, is constrained by a time horizon that satisfies shareholders and quarterly earnings calls. Mariana Mazzucato's The Entrepreneurial State (2013) makes this structural point with precision: the technologies that define the modern world, the internet, GPS, touchscreens, and the algorithms underlying search engines were not born in Silicon Valley. They were born in DARPA laboratories and government-funded research institutions, then handed to the private sector to commercialise. As Mazzucato observes, "the private sector only finds the courage to invest after an entrepreneurial state has made the high-risk investments." Moonshots, in other words, are not anti-market. They are market-making.`,
-
-`The iPhone, that canonical symbol of private innovation, is in reality a public artefact. Every core technology within it, the internet protocol, GPS navigation, the touchscreen interface, Siri's voice recognition, emerged from publicly funded research conducted decades before Apple's founding. Steve Jobs did not build on a foundation laid by the market. He built on a foundation laid by the state. The same pattern appears in space research: NASA's own economic-impact report for 2023 records that the agency generated $76 billion in economic output while consuming less than 0.5% of the US federal budget, and has catalogued more than 2,000 commercial spinoffs since 1976. The arithmetic of ambition, it turns out, is surprisingly generous.`,
-
-`This is not a coincidence. It reflects a basic asymmetry: the timeline for moonshot science — curing ageing, achieving nuclear fusion, developing interstellar propulsion is measured in decades, not quarters. No hedge fund will finance a project whose first meaningful result arrives in thirty years. No pharmaceutical company will invest in defeating biological senescence if the patent clock expires before clinical deployment. Only governments, insulated (when functioning well) from short-term profit imperatives, can make these bets. Vannevar Bush understood this in 1945, writing in Science, the Endless Frontier, that basic research is "the pacemaker of technological progress" and the "scientific capital" from which all practical applications must eventually be drawn. To stop funding moonshots is to stop replenishing the well.`,
-
-`The case for prioritising incremental research is superficially compelling: it is reliable, accountable, and evidence-based. But consider a thought experiment. In 1900, a forward-thinking government seeking to "incrementally improve" transport would have invested in better horse-breeding programmes, wider cobblestone roads, and more efficient saddle design. All are measurably beneficial and immediately applicable. None of which led to the automobile. The automobile did not emerge from incremental improvements in horses. It required a conceptual rupture — a willingness to fund something that seemed absurd to a world organised around horses.`,
-
-`Peter Thiel names this distinction in Zero to One (2014): the difference between going from "1 to n" (making more of what already exists) and going from "0 to 1" (creating something genuinely new). Incremental funding, by definition, funds the former. The mathematical analogy embedded within Thiel’s idea is revealing. There are infinitely more real numbers between 0 and 1 than there are natural numbers between 1 and infinity. Moving from “0 to 1” — from impossibility to possibility changes the structure of reality itself. Once flight became possible, the world reorganised around aviation. Once computation became possible, civilisation reorganised around information. The space of genuine novelty is denser, richer, and more generative than the space of incremental improvement. Governments that only optimise within the known paradigm are not being prudent, they are systematically ignoring the more fertile territory.`,
-
-`To understand why moonshots are necessary, consider the Hill-Climber’s Paradox: a traveller climbing a hill in fog, each step feeling like progress, reaching a peak. But if fog lifts, they may see it's just a foothill, with a mountain range beyond a valley. Incrementalism is climbing the current hill, while a moonshot chooses to descend into uncertainty to reach a larger mountain.`,
-
-`The historical record of large-scale public science investment is not a story of uniform triumph, but it is a story of extraordinary asymmetric returns. The Manhattan Project, the Moon landing, the development of AIDS therapies in the 1980s, and the completion of the Human Genome Project in the 1990s all represent cases where focused public ambition produced outcomes that no incremental programme would have reached (Fauci and Lane). Nixon's war on cancer in the 1970s is the counter-example critics rightly invoke — a moonshot that failed to deliver its headline promise (National Cancer Institute). But even that failure produced oncological insights, imaging technologies, and chemotherapy protocols that went on to save millions of lives. The "waste" in moonshot funding is rarely lost. It is transformed.`,
-
-`The Human Genome Project is the purest case study. Launched in 1990, it was initially derided as absurdly expensive and speculative. Critics argued the money would be better spent on immediate healthcare improvements - building clinics, training doctors, buying drugs that already worked. The project cost roughly $3 billion over thirteen years. A 2013 analysis by the Battelle Memorial Institute estimated it had by then generated $796 billion in economic activity and 310,000 jobs, with cascading effects in cancer diagnostics, personalised medicine, and forensic science still compounding today. The return-to-investment ratio was approximately 178:1. No incremental programme in the history of public health funding has approached that figure. And crucially, the cascade of benefit went far beyond genetics — because when you aim for a moonshot, the technical hurdles you encounter force you to solve problems you did not even know existed.`,
-
-`"The most important thing we can do is to expand the scope of what we think is possible." — Richard Feynman, The Pleasure of Finding Things Out (1999)`,
-
-`The private market can't fund interstellar travel since 'payback periods' exceed a human lifetime. Governments fill this gap because markets underprovide long-term public goods. A health system focused only on current symptoms perpetuates the problem. As the 'ultimate risk-bearer,' government creates a 'common' knowledge base for the private sector to build upon.`,
-
-`The strongest objection to moonshot funding is not that it is too expensive. It is the objection raised by Daniel Sarewitz in Frontiers of Illusion (1996): ambitious science doesn't always bring social benefits and often makes false promises. Funds for megaprojects can displace community-focused research that meets urgent human needs. This critique should be considered seriously, not dismissed.`,
-
-`But Sarewitz's objection, correctly understood, is an argument for better governance of moonshots, not for their abandonment. The answer to the risk of misdirected ambition is not to eliminate ambition but to democratise its selection. Sheila Jasanoff's work in The Ethics of Invention (2016) points toward what she calls "sociotechnical imaginaries" — the idea that different societies legitimately envision different scientific futures, and that the choice of which futures to pursue must involve broader democratic deliberation rather than expert consensus alone. The solution to ambitious science that might outpace our ethical readiness — the concern Nicholas Agar raises in Humanity's End (2010) regarding radical enhancement — is not to defund the dream but to bring the humanities into the laboratory. Ethics and ambition are not opposites. They are co-producers of responsible innovation.`,
-
-`What this means in practice is that the governance of moonshot funding matters as much as the funding itself. The EU's Graphene Flagship initiative was not a blank cheque handed to physicists. It involved systematic review panels, industry partnerships, and defined social impact objectives. The US government's ARPA-E funds high-risk energy research with explicit milestones and portfolio logic. The UK's Advanced Research and Invention Agency is explicitly modelled on DARPA's mandate to fund research "too risky for conventional funders." These are not reckless experiments. They are structured risk-taking — with the state acting as the only investor with a long enough time horizon and a broad enough mandate to absorb the inevitable failures that precede transformative success.`,
-
-`Critics of moonshots frequently point to failed large-scale projects as evidence against ambitious funding. President Richard Nixon’s “War on Cancer” in the 1970s, for example, failed to produce the decisive cure that politicians promised. However, this criticism misunderstands how transformative science actually works. Moonshots rarely succeed in the exact way originally imagined. Their value often emerges indirectly through what may be called “collateral innovation.”`,
-
-`Science scholar Daniel Sarewitz, in Frontiers of Illusion (1996), argues ambitious science doesn't guarantee social benefit. While criticising scientific ambition, he underestimates how moonshots create unforeseen tech ecosystems. The Apollo Program didn’t build lunar cities or colonies in the twentieth century, so by narrow standards, it might seem a failure. However, Apollo technologies transformed telecommunications, materials science, integrated circuits, weather forecasting, satellite systems, and computing. NASA reports thousands of tech spinoffs from space research.`,
-
-`There is a final dimension that the standard framing consistently obscures: the ethics of not trying. The debate is typically staged as a contest between ambitious risk and cautious responsibility — as though incremental funding is the morally safe option and moonshots are the morally extravagant one. This framing is false. Both paths carry moral weight. The risk of moonshot failure is visible, countable, and attributable. The risk of incremental timidity is invisible, distributed, and deniable. That asymmetry of visibility is routinely mistaken for an asymmetry of moral significance.`,
-
-`Every year that ageing remains biologically unchallenged costs approximately 100,000 human lives per day worldwide — not from war or poverty but from the cellular process of senescence (World Health Organization). Every decade that nuclear fusion remains "thirty years away" because governments preferred the safer investment represents a choice about which populations absorb the cost of the delay. A health system that only funds today's symptoms without building tomorrow's cure will always be chasing the problem. A government that only repairs the current infrastructure without investing in next-generation solutions will always be one crisis behind. The best objection to moonshot funding — that money is finite and immediate needs are real — is precisely correct. And that is exactly why moonshots must be publicly funded, because governments are the only institutions whose mandate extends beyond the immediate, whose obligations reach toward the future rather than only the present.`,
-
-`J. D. Bernal argued in The Social Function of Science (1939) that scientific ambition must be consciously aligned with social need. The insight cuts both ways. To align with genuine social need is to reckon honestly with the scale and irreversibility of the problems that await us: climate tipping points, pandemic preparedness, neurodegenerative disease, the energy transition. These are not problems that incremental improvement, compounded over decades, will be fast enough to solve. They are problems that demand the willingness to descend into the valley.`,
-
-`The case for government funding of moonshot science is not a case for recklessness or for the abandonment of accountability. It is a case for institutional realism. Markets cannot fund it — their time horizons are too short. Philanthropy cannot sustain it at scale — its capital base is too narrow. International bodies cannot coordinate it reliably — their mandates are too contested. Only the state, functioning as what Mazzucato calls an "entrepreneurial state" rather than a merely regulatory one, has the combination of capital, patience, and civilisational mandate that transformative science requires.`,
-
-`The Manhattan Project. The Moon landing. AIDS therapies. The Human Genome Project. Each was speculative, each was expensive, and each was irreplaceable. Nixon's war on cancer reminds us that moonshots can fail on their headline promise — but even failed moonshots tend to cascade into advances that incremental research would have taken far longer to reach. The record of ambitious public science is not a record of uniform triumph. It is a record of asymmetric returns that no cautious portfolio could have generated.`,
-
-`A society without ambitious public science does not remain stable — it slowly becomes trapped inside the size of its current imagination. Governments that fund only what they can already measure will eventually find that they can only imagine what they already know. The question before policymakers is not whether some budget should go to speculative projects. It is whether we have the institutional courage to make the bet — to descend into the valley of uncertainty, knowing the mountain is there, even when the fog is thick and the election is close.`,
-
-`"Basic research is the pacemaker of technological progress... it creates the fund from which the practical applications of knowledge must be drawn." — Vannevar Bush, Science, the Endless Frontier (1945)`,
-
-`Bush wrote those words in the aftermath of a war that had proven, with terrible clarity, what happens when nations invest in transformative science — and what happens when they do not. The lesson has not aged. Governments that fund moonshots are not gambling with public resources. They are honouring the only obligation that matters across generations: expanding what the future is allowed to be.`,
-
-`Moonshots are not a luxury after the "real" work is done; they are part of the real work. The right model for a healthy society is not "either/or," but "base hits plus one or two attempts at a civilization-changing swing".`,
-`This essay was submitted to the 2026 CCIR Cambridge Re:Think Essay Competition and one the Honourable Mention award`
+    body:[`In 1962, standing before a crowd at Rice University, President John F. Kennedy declared that the United States would go to the Moon not because it was easy, but precisely because it was hard. Many dismissed the statement as political theatre. It was, in fact, something more precise: an institutional commitment to the idea that civilisational ambition is itself a policy instrument. Kennedy was not announcing a programme with a calculated return on investment. He was placing a civilisational bet, and in doing so, changing what the future was allowed to contain. Today, as governments wrestle with finite budgets and infinite demands, a familiar logic re-emerges: fund what works, what is proven, what delivers measurable benefit within an election cycle. This essay argues that this logic, however prudent it sounds, is historically illiterate and strategically self-defeating. The thesis is this: governments are the only institutions structurally capable of funding science at the scale and patience that civilisation-altering problems require, and to retreat to pure incrementalism is not caution. It is the slow, deniable abdication of the future.`,
+    `The case for moonshot public funding begins not with ideology but with structure. Private capital, even at its most ambitious, is constrained by a time horizon that satisfies shareholders and quarterly earnings calls. Mariana Mazzucato's The Entrepreneurial State (2013) makes this structural point with precision: the technologies that define the modern world, the internet, GPS, touchscreens, and the algorithms underlying search engines were not born in Silicon Valley. They were born in DARPA laboratories and government-funded research institutions, then handed to the private sector to commercialise. As Mazzucato observes, "the private sector only finds the courage to invest after an entrepreneurial state has made the high-risk investments." Moonshots, in other words, are not anti-market. They are market-making.`,
+    `The iPhone, that canonical symbol of private innovation, is in reality a public artefact. Every core technology within it, the internet protocol, GPS navigation, the touchscreen interface, Siri's voice recognition, emerged from publicly funded research conducted decades before Apple's founding. Steve Jobs did not build on a foundation laid by the market. He built on a foundation laid by the state. The same pattern appears in space research: NASA's own economic-impact report for 2023 records that the agency generated $76 billion in economic output while consuming less than 0.5% of the US federal budget, and has catalogued more than 2,000 commercial spinoffs since 1976. The arithmetic of ambition, it turns out, is surprisingly generous.`,
+    `This is not a coincidence. It reflects a basic asymmetry: the timeline for moonshot science — curing ageing, achieving nuclear fusion, developing interstellar propulsion is measured in decades, not quarters. No hedge fund will finance a project whose first meaningful result arrives in thirty years. No pharmaceutical company will invest in defeating biological senescence if the patent clock expires before clinical deployment. Only governments, insulated (when functioning well) from short-term profit imperatives, can make these bets. Vannevar Bush understood this in 1945, writing in Science, the Endless Frontier, that basic research is "the pacemaker of technological progress" and the "scientific capital" from which all practical applications must eventually be drawn. To stop funding moonshots is to stop replenishing the well.`,
+    `The case for prioritising incremental research is superficially compelling: it is reliable, accountable, and evidence-based. But consider a thought experiment. In 1900, a forward-thinking government seeking to "incrementally improve" transport would have invested in better horse-breeding programmes, wider cobblestone roads, and more efficient saddle design. All are measurably beneficial and immediately applicable. None of which led to the automobile. The automobile did not emerge from incremental improvements in horses. It required a conceptual rupture — a willingness to fund something that seemed absurd to a world organised around horses.`,
+    `Peter Thiel names this distinction in Zero to One (2014): the difference between going from "1 to n" (making more of what already exists) and going from "0 to 1" (creating something genuinely new). Incremental funding, by definition, funds the former. The mathematical analogy embedded within Thiel’s idea is revealing. There are infinitely more real numbers between 0 and 1 than there are natural numbers between 1 and infinity. Moving from “0 to 1” — from impossibility to possibility changes the structure of reality itself. Once flight became possible, the world reorganised around aviation. Once computation became possible, civilisation reorganised around information. The space of genuine novelty is denser, richer, and more generative than the space of incremental improvement. Governments that only optimise within the known paradigm are not being prudent, they are systematically ignoring the more fertile territory.`,
+    `To understand why moonshots are necessary, consider the Hill-Climber’s Paradox: a traveller climbing a hill in fog, each step feeling like progress, reaching a peak. But if fog lifts, they may see it's just a foothill, with a mountain range beyond a valley. Incrementalism is climbing the current hill, while a moonshot chooses to descend into uncertainty to reach a larger mountain.`,
+    `The historical record of large-scale public science investment is not a story of uniform triumph, but it is a story of extraordinary asymmetric returns. The Manhattan Project, the Moon landing, the development of AIDS therapies in the 1980s, and the completion of the Human Genome Project in the 1990s all represent cases where focused public ambition produced outcomes that no incremental programme would have reached (Fauci and Lane). Nixon's war on cancer in the 1970s is the counter-example critics rightly invoke — a moonshot that failed to deliver its headline promise (National Cancer Institute). But even that failure produced oncological insights, imaging technologies, and chemotherapy protocols that went on to save millions of lives. The "waste" in moonshot funding is rarely lost. It is transformed.`,
+    `The Human Genome Project is the purest case study. Launched in 1990, it was initially derided as absurdly expensive and speculative. Critics argued the money would be better spent on immediate healthcare improvements - building clinics, training doctors, buying drugs that already worked. The project cost roughly $3 billion over thirteen years. A 2013 analysis by the Battelle Memorial Institute estimated it had by then generated $796 billion in economic activity and 310,000 jobs, with cascading effects in cancer diagnostics, personalised medicine, and forensic science still compounding today. The return-to-investment ratio was approximately 178:1. No incremental programme in the history of public health funding has approached that figure. And crucially, the cascade of benefit went far beyond genetics — because when you aim for a moonshot, the technical hurdles you encounter force you to solve problems you did not even know existed.`,
+    `"The most important thing we can do is to expand the scope of what we think is possible." — Richard Feynman, The Pleasure of Finding Things Out (1999)`,
+    `The private market can't fund interstellar travel since 'payback periods' exceed a human lifetime. Governments fill this gap because markets underprovide long-term public goods. A health system focused only on current symptoms perpetuates the problem. As the 'ultimate risk-bearer,' government creates a 'common' knowledge base for the private sector to build upon.`,
+    `The strongest objection to moonshot funding is not that it is too expensive. It is the objection raised by Daniel Sarewitz in Frontiers of Illusion (1996): ambitious science doesn't always bring social benefits and often makes false promises. Funds for megaprojects can displace community-focused research that meets urgent human needs. This critique should be considered seriously, not dismissed.`,
+    `But Sarewitz's objection, correctly understood, is an argument for better governance of moonshots, not for their abandonment. The answer to the risk of misdirected ambition is not to eliminate ambition but to democratise its selection. Sheila Jasanoff's work in The Ethics of Invention (2016) points toward what she calls "sociotechnical imaginaries" — the idea that different societies legitimately envision different scientific futures, and that the choice of which futures to pursue must involve broader democratic deliberation rather than expert consensus alone. The solution to ambitious science that might outpace our ethical readiness — the concern Nicholas Agar raises in Humanity's End (2010) regarding radical enhancement — is not to defund the dream but to bring the humanities into the laboratory. Ethics and ambition are not opposites. They are co-producers of responsible innovation.`,
+    `What this means in practice is that the governance of moonshot funding matters as much as the funding itself. The EU's Graphene Flagship initiative was not a blank cheque handed to physicists. It involved systematic review panels, industry partnerships, and defined social impact objectives. The US government's ARPA-E funds high-risk energy research with explicit milestones and portfolio logic. The UK's Advanced Research and Invention Agency is explicitly modelled on DARPA's mandate to fund research "too risky for conventional funders." These are not reckless experiments. They are structured risk-taking — with the state acting as the only investor with a long enough time horizon and a broad enough mandate to absorb the inevitable failures that precede transformative success.`,
+    `Critics of moonshots frequently point to failed large-scale projects as evidence against ambitious funding. President Richard Nixon’s “War on Cancer” in the 1970s, for example, failed to produce the decisive cure that politicians promised. However, this criticism misunderstands how transformative science actually works. Moonshots rarely succeed in the exact way originally imagined. Their value often emerges indirectly through what may be called “collateral innovation.”`,
+    `Science scholar Daniel Sarewitz, in Frontiers of Illusion (1996), argues ambitious science doesn't guarantee social benefit. While criticising scientific ambition, he underestimates how moonshots create unforeseen tech ecosystems. The Apollo Program didn’t build lunar cities or colonies in the twentieth century, so by narrow standards, it might seem a failure. However, Apollo technologies transformed telecommunications, materials science, integrated circuits, weather forecasting, satellite systems, and computing. NASA reports thousands of tech spinoffs from space research.`,
+    `There is a final dimension that the standard framing consistently obscures: the ethics of not trying. The debate is typically staged as a contest between ambitious risk and cautious responsibility — as though incremental funding is the morally safe option and moonshots are the morally extravagant one. This framing is false. Both paths carry moral weight. The risk of moonshot failure is visible, countable, and attributable. The risk of incremental timidity is invisible, distributed, and deniable. That asymmetry of visibility is routinely mistaken for an asymmetry of moral significance.`,
+    `Every year that ageing remains biologically unchallenged costs approximately 100,000 human lives per day worldwide — not from war or poverty but from the cellular process of senescence (World Health Organization). Every decade that nuclear fusion remains "thirty years away" because governments preferred the safer investment represents a choice about which populations absorb the cost of the delay. A health system that only funds today's symptoms without building tomorrow's cure will always be chasing the problem. A government that only repairs the current infrastructure without investing in next-generation solutions will always be one crisis behind. The best objection to moonshot funding — that money is finite and immediate needs are real — is precisely correct. And that is exactly why moonshots must be publicly funded, because governments are the only institutions whose mandate extends beyond the immediate, whose obligations reach toward the future rather than only the present.`,
+    `J. D. Bernal argued in The Social Function of Science (1939) that scientific ambition must be consciously aligned with social need. The insight cuts both ways. To align with genuine social need is to reckon honestly with the scale and irreversibility of the problems that await us: climate tipping points, pandemic preparedness, neurodegenerative disease, the energy transition. These are not problems that incremental improvement, compounded over decades, will be fast enough to solve. They are problems that demand the willingness to descend into the valley.`,
+    `The case for government funding of moonshot science is not a case for recklessness or for the abandonment of accountability. It is a case for institutional realism. Markets cannot fund it — their time horizons are too short. Philanthropy cannot sustain it at scale — its capital base is too narrow. International bodies cannot coordinate it reliably — their mandates are too contested. Only the state, functioning as what Mazzucato calls an "entrepreneurial state" rather than a merely regulatory one, has the combination of capital, patience, and civilisational mandate that transformative science requires.`,
+    `The Manhattan Project. The Moon landing. AIDS therapies. The Human Genome Project. Each was speculative, each was expensive, and each was irreplaceable. Nixon's war on cancer reminds us that moonshots can fail on their headline promise — but even failed moonshots tend to cascade into advances that incremental research would have taken far longer to reach. The record of ambitious public science is not a record of uniform triumph. It is a record of asymmetric returns that no cautious portfolio could have generated.`,
+    `A society without ambitious public science does not remain stable — it slowly becomes trapped inside the size of its current imagination. Governments that fund only what they can already measure will eventually find that they can only imagine what they already know. The question before policymakers is not whether some budget should go to speculative projects. It is whether we have the institutional courage to make the bet — to descend into the valley of uncertainty, knowing the mountain is there, even when the fog is thick and the election is close.`,
+    `"Basic research is the pacemaker of technological progress... it creates the fund from which the practical applications of knowledge must be drawn." — Vannevar Bush, Science, the Endless Frontier (1945)`,
+    `Bush wrote those words in the aftermath of a war that had proven, with terrible clarity, what happens when nations invest in transformative science — and what happens when they do not. The lesson has not aged. Governments that fund moonshots are not gambling with public resources. They are honouring the only obligation that matters across generations: expanding what the future is allowed to be.`,
+    `Moonshots are not a luxury after the "real" work is done; they are part of the real work. The right model for a healthy society is not "either/or," but "base hits plus one or two attempts at a civilization-changing swing".`,
+    `This essay was submitted to the 2026 CCIR Cambridge Re:Think Essay Competition and won the Honourable Mention award`
 ]},
-
-  { id:'subsets', cat:'math', importance:1.3,
-    title:'Counting Subsets Without Counting',
-    desc:'Three independent proofs that a set of size n has exactly 2ⁿ subsets — combinatorial, inductive, and via the Boolean lattice.',
-    date:'14 Jan 2026', readTime:8,
+    { id:'cyclotron', cat:'robotics', importance:1.6,
+    title:'A Cyclotron (Particle Accelerator) Demonstration',
+    desc:'My journey making a cyclotron from scratch, using electromagnets to accelerate a neodymium magnet in a circular path, and the physics behind it.',
+    date:'10 Oct 2026', readTime:14,
     body:[
-      'The formula |𝒫(A)| = 2ⁿ is the kind of result you can believe immediately and still spend a satisfying afternoon actually proving. The fastest route is combinatorial: building a subset is n independent yes/no decisions, one per element, and the multiplication principle does the rest.',
-      'The inductive route is slower and more honest about why the formula holds. Assume it for a set of size k, then add one new element: every existing subset either includes the newcomer or it does not, exactly doubling the count. It is induction as a ladder rather than a leap — each rung load-bearing, nothing skipped.',
-      'The third route is the most visual: draw the Hasse diagram of the subsets of a small set ordered by inclusion, and the power set reveals itself as a Boolean lattice — the n-cube, essentially, with 2ⁿ vertices. Three proofs, three different reasons to trust the same number.'
+      `A while ago, I came across the idea of building a simple tabletop particle accelerator and immediately found the concept fascinating; especially after my recent trip to CERN, which allowed me to take a deeper look into the engineering behind massive supercolliders. Real particle accelerators are enormous machines involving superconducting magnets, radio-frequency cavities, ultra-high vacuum systems and incredibly precise control electronics. Building anything remotely similar at home sounded unrealistic. Instead, I decided to build a demonstration model that could reproduce one of the most fundamental ideas behind an accelerator: giving a moving object repeated, precisely timed electromagnetic pushes.`,
+      `The result was my Electromagnetic Particle Accelerator Demonstration, a small circular accelerator in which an 8 mm magnetic sphere travels around a 160 mm-diameter track while electromagnets repeatedly accelerate it.`,
+      `The project was inspired by the principles behind machines such as cyclotrons and synchrotrons, although the mechanism is different from a real particle accelerator. In an actual accelerator, charged particles are accelerated primarily by electric fields while magnetic fields guide and focus them. My model instead uses magnetic attraction to accelerate an 8mm neodymium sphere.`,
+      `The central idea is surprisingly simple. Imagine pushing a ball around a circular track. If I could give the ball a small forward push every time it reached a particular point, the pushes would gradually increase its speed.`,
+      `That is essentially what my accelerator does.`,
+      `The track has a major radius of 80 mm, meaning the centre of the magnetic sphere travels around a circular path with approximately an 80 mm radius. The track also has a minor radius of 7.5 mm, which forms the groove in which the sphere travels.`,
+      `Two electromagnets are positioned opposite one another around the track. As the magnetic sphere approaches a coil, the coil is switched on for a short period. The magnetic field attracts the sphere and transfers energy to it. The coil then switches off before the sphere can be pulled backwards. The process repeats at the opposite coil and on every subsequent revolution.`,
+      `I designed the accelerator structure using Blender and 3D printed the components in PLA. Designing the track was one of the first major challenges because the ball needed to move freely while remaining sufficiently constrained.`,
+      `The dimensions had to balance several factors. If the groove was too tight, friction would slow the sphere significantly. If it was too loose, the sphere could move unpredictably and lose contact with the intended path. The final design used the 80 mm major radius and 7.5 mm minor radius.`,
+      `The accelerator was designed as a two-part circular assembly that could be closed around the magnetic sphere. The coils were positioned on opposite sides of the track.`,
+      `Each electromagnet consists of approximately 100 turns of 0.51 mm diameter enameled copper wire. The coils are connected in series and are driven by the transistor circuit.`,
+      `The coils ultimately became one of the most important parts of the entire system because increasing the magnetic field is not simply a matter of increasing the voltage. Higher current produces a stronger magnetic field, but also increases heating and places greater demands on the transistor and battery.`,
+      `The circuit uses electromagnetic induction to detect the moving sphere itself.`,
+      `The circuit is based around three transistors: a BC558 PNP transistor, BC337 NPN transistor and BD135 power transistor. It also includes a 1000 μF capacitor, a 1 MΩ potentiometer, two 100 kΩ resistors, a 1 kΩ resistor, a 12 kΩ resistor and a 100 Ω resistor, with a 9 V battery providing the power.`,
+      `When the magnetic sphere moves near a coil, the changing magnetic flux induces a voltage in the coil according to Faraday's law.`,
+      `This tiny induced voltage is used by the transistor circuit as a trigger. The BC558 responds to the induced signal, which then drives the BC337. The BC337 controls the base of the BD135, which acts as the power transistor responsible for switching the coil current.`,
+      `In effect, the same electromagnetic system acts as both a sensor and an actuator.`,
+      `The project also gave me a much better appreciation for real particle accelerators. My small 160 mm track is obviously nothing compared with facilities such as the LHC, but the underlying engineering philosophy is surprisingly relatable.`
     ]},
 
-  { id:'induction', cat:'math', importance:0.75,
-    title:'Induction as a Ladder, Not a Leap',
-    desc:'Why the inductive step is best understood as a machine for climbing, not a single clever jump from one case to all cases.',
-    date:'28 Jan 2026', readTime:5,
+    { id:'cov', cat:'mun', importance:0.6,
+    title:'The Congress of Vienna at LMCMUN\'26',
+    desc:'My journey as a rapparteur in the Congress of Vienna committee at LMCMUN\'26',
+    date:'19 May 2026', readTime:6,
     body:[
-      'Mathematical induction gets taught as two steps — base case, inductive step — but the metaphor that actually sticks is a ladder. The base case is the first rung. The inductive step is not a leap to the top; it is a promise that whichever rung you are standing on, you can always reach the next one.',
-      'That reframing matters because the failure modes of induction are almost always failures of the ladder, not the leap. An inductive step that secretly assumes something true only for small n, or that quietly changes the structure being climbed partway up, will collapse the argument even if the base case and the "leap" both look fine in isolation.',
-      'Once you start checking induction proofs rung by rung instead of trusting the shape of the argument, a surprising number of classic fallacious proofs — the ones where every horse is supposedly the same colour — become easy to catch.'
+      `My enemies are many. My equals are none. ~ Naploeon Bonaparte`,
+      `The Congress of Vienna at LMCMUN 2026 was, for me, much more than another MUN committee. Sitting on the Executive Board as a Rapporteur gave me an entirely different perspective on what happens inside a committee. I was no longer concerned with defending a portfolio, preparing arguments, or trying to win a debate. Instead, I had the opportunity to watch thirty individuals attempt to reshape post-Napoleonic Europe from across the room.`,
+      `The committee was set in 1814, at a moment when Europe was technically approaching peace but was nowhere close to stability. As our Study Guide put it, Europe was in a “hallway of pause.” Napoleon had been defeated, but the coalition that had defeated him was already beginning to fracture.`,
+      `As a Rapporteur, seeing delegates discover these differences in real time was one of the most rewarding parts of the experience. I particularly enjoyed watching the committee move beyond speeches and into genuine diplomacy. The most important developments were often not the ones happening at the centre of the room. They were happening in conversations between delegates: alliances being quietly formed, positions being negotiated, information being exchanged and concessions being offered. A delegate could deliver an excellent speech and still have little influence if they could not convert that speech into relationships.`,
+      `The reverse was equally interesting. Some delegates were not necessarily the loudest voices in the room, yet gradually became essential to negotiations because they possessed something another delegate needed.`,
+      `Watching delegates navigate this was genuinely fascinating because there was rarely a straightforward "correct" answer. Every concession created another problem somewhere else.`,
+      `That was also what made my role as Rapporteur so interesting. I could observe the entire political ecosystem rather than being confined to one portfolio. I could see alliances forming before they became obvious, watch delegates change their strategies, and see how individual actions affected the broader balance of the committee.`,
+      `Most importantly, I got to watch delegates become their portfolios. A successful delegate was not simply someone who knew the history of Napoleon or could quote Metternich. They were someone who understood what their character wanted, what they could realistically achieve, whom they could influence and what they were willing to sacrifice to get there.`
     ]},
 
-  { id:'lattices', cat:'math', importance:0.6,
-    title:'Boolean Lattices and the Shape of Choice',
-    desc:'The power set of a finite set, drawn as a diagram, turns out to have the same shape as a hypercube.',
-    date:'9 Feb 2026', readTime:4,
-    body:[
-      'Draw every subset of {a, b, c} as a node, connect two nodes if one subset is obtained from the other by adding a single element, and something unexpected appears: a cube. Not metaphorically — the diagram is literally the edge graph of a 3-cube, with the empty set at one corner and the full set at the opposite one.',
-      'This is the Boolean lattice, and it generalises cleanly: the subsets of an n-element set, ordered by inclusion, form the n-dimensional hypercube. Every property of the hypercube you can find — its symmetry group, its diameter, the number of edges — translates directly into a statement about how subsets relate to each other.',
-      'It is a small piece of evidence for a bigger pattern in mathematics: counting problems and combinatorial structures keep turning out to be geometry wearing a different coat.'
-    ]},
-
-  { id:'freeze-date', cat:'ir', importance:1.1,
-    title:'Freeze Dates and False Anachronisms',
-    desc:'In a historical crisis committee, the sharpest weapon is not a stronger argument — it is a source your opponent forgot did not exist yet.',
-    date:'19 Apr 2026', readTime:7,
-    body:[
-      'Every historical Model UN committee is built around a freeze date, the fictional moment at which the simulation begins and everything after becomes unwritten. The discipline this demands is unglamorous and almost entirely invisible to anyone not doing it: knowing, instrument by instrument, exactly which treaties, protocols, and doctrines were legally binding on that date, and which were still years away.',
-      'This matters more than it sounds. A delegate who cites an instrument that postdates the freeze — reaching for language that sounds authoritative but was not yet law — has handed the room a gift. The correction does not just neutralise the argument; it signals, to everyone watching, that the rest of that delegation\'s legal arsenal deserves scrutiny too.',
-      'Preparing for this kind of committee is less like writing an essay and more like building a minefield: a legal dossier is only as useful as the traps it lets you set for delegations that have not done the same chronological homework.'
-    ]},
-
-  { id:'montreux', cat:'ir', importance:0.95,
-    title:'The Montreux Convention as a Weapon',
-    desc:'A 1936 treaty about who may sail through the Turkish Straits, repurposed as the leverage point of an entire crisis strategy.',
-    date:'3 May 2026', readTime:6,
-    body:[
-      'The Montreux Convention of 1936 is not, on its face, dramatic reading. It governs the passage of warships through the Bosphorus and the Dardanelles, granting Turkey control over naval transit between the Black Sea and the Mediterranean, with different rules for Black Sea and non-Black Sea powers.',
-      'In a Cold War crisis committee, that dry procedural fact becomes a chokepoint in the most literal sense — a legal lever capable of stranding a fleet, delaying a resupply, or forcing an adversary to route around an entire sea. The strength of building a strategy on an instrument like this is that almost nobody else in the room has read it closely enough to contest it.',
-      'The lesson generalises past any one committee: the most powerful clause in a negotiation is rarely the one everyone is already arguing about.'
-    ]},
-
-  { id:'crossfire', cat:'ir', importance:0.55,
-    title:'Building a Crossfire Question Bank',
-    desc:'Preparing thirty delegation-specific questions in advance turns crossfire from improvisation into a rehearsed offensive.',
-    date:'27 May 2026', readTime:4,
-    body:[
-      'Crossfire rewards delegates who look spontaneous, but the ones who are actually winning it rarely are. Behind a good crossfire performance is usually a question bank built weeks earlier — one entry per opposing delegation, grounded in that country\'s documented historical position and, ideally, a specific violation or contradiction only a handful of people in the room will have researched.',
-      'The bank is not meant to be recited verbatim. It is scaffolding: a question you already know the shape of the honest answer to, so you can listen for the moment a delegate drifts from it and follow up in real time.',
-      'Done well, this turns crossfire from a test of quick thinking into a test of preparation wearing quick thinking as a costume — which, most of the time, is a fair description of good diplomacy generally.'
-    ]},
-
-  { id:'personal-galaxy', cat:'web', importance:0.9,
-    title:'A Personal Galaxy, in One HTML File',
-    desc:'On building a self-contained personal site — blog, garden, and portfolio — as a single file with no build step and no dependencies to rot.',
-    date:'6 Jun 2026', readTime:6,
-    body:[
-      'There is something appealing about a website that is also a single file. No build step, no framework version to fall out of date, no dependency tree to audit two years from now. Just markup, a stylesheet, and enough JavaScript to make it feel alive, all sitting in one document you could email to yourself.',
-      'The trade-off is discipline: everything has to earn its place, because there is no folder structure to hide complexity in. A dark theme, a particle background, an admin view, a digital garden of half-finished notes — each of those has to be built plainly enough that the whole file stays legible six months later.',
-      'The reward is durability. A single self-contained file is close to the most future-proof format a personal site can take — it will still open, unmodified, long after whatever hosting platform seemed permanent at the time has changed its pricing twice.'
-    ]},
-
-  { id:'discovery', cat:'web', importance:0.65,
-    title:'Designing for Discovery Instead of Scroll',
-    desc:'What changes when a blog\'s primary navigation is spatial exploration rather than a reverse-chronological list.',
-    date:'19 Jun 2026', readTime:5,
-    body:[
-      'A reverse-chronological list is an honest interface — it tells you exactly what it is optimising for, which is recency. But recency is a strange thing to optimise a personal blog around, when half the appeal of going back through old writing is bumping into something you had forgotten you thought.',
-      'A spatial layout changes the implicit question the homepage is asking. Instead of "what did I write most recently," it asks "what is near what," which forces categories and relationships to become visible in a way a list simply cannot show. Two posts written eight months apart can sit next to each other if the ideas are adjacent.',
-      'The risk is discoverability for its own sake, style outrunning function. The fix, in practice, has been to keep the spatial layer thin — one clear axis of meaning (category, importance) per visual property — so exploration feels like a shortcut to relevant ideas, not a puzzle standing in front of them.'
-    ]},
-
-  { id:'actuators', cat:'robotics', importance:0.8,
-    title:'Actuators, Latency, and Trust',
-    desc:'A small delay between command and motion is a physics problem. Left unaddressed, it becomes a trust problem.',
-    date:'30 Jun 2026', readTime:5,
-    body:[
-      'Every actuator has a gap between being told to move and actually moving — friction to overcome, current to ramp, a control loop that needs a few cycles to settle. In isolation, a few milliseconds of latency is a footnote in a datasheet.',
-      'Stack several of those gaps together, across several joints, and the footnote becomes something a person operating the system can feel: a sluggishness that reads less like "the motor is slow" and more like "the machine is not quite listening." That perceptual jump — from a timing spec to a feeling of unresponsiveness — is where a lot of otherwise well-engineered robotics projects lose the confidence of whoever is using them.',
-      'Closing that gap is partly a hardware problem and partly a communication one: even a system that cannot be made faster can be made to feel more trustworthy simply by acknowledging a command instantly and letting the motion catch up a moment later.'
-    ]},
-
-  { id:'sensors', cat:'robotics', importance:0.5,
-    title:'Sensors That Lie a Little',
-    desc:'No sensor tells the truth exactly. Good hardware design is mostly deciding how much of a lie is acceptable, and where.',
-    date:'9 Jul 2026', readTime:4,
-    body:[
-      'It is tempting to treat a sensor reading as ground truth simply because it is a number rather than an opinion. In practice every sensor is a translator with an accent: an ultrasonic rangefinder that struggles with soft or angled surfaces, an IMU that drifts a little further from reality with every second it goes uncorrected, a cheap photoresistor that reports light level with a curve nobody bothered to linearise.',
-      'None of this makes the sensor useless. It makes the honest question not "is this reading correct" but "in which direction, and under which conditions, is this reading wrong" — and then designing the rest of the system around that specific, predictable dishonesty rather than an idealised one.',
-      'The best hardware projects tend to be the ones where every sensor\'s particular lie has been catalogued in advance, rather than discovered live, in front of a judging panel.'
-    ]}
 ];
 
 /* ===========================================================================
